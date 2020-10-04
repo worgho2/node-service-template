@@ -1,0 +1,27 @@
+tags:
+  - name: user
+    description: User information
+
+components:
+  schemas:
+    UserLevels:
+      description: |
+        A map with User Levels in the format **level: xp** \
+        Differently from Actions, the first user level is 1.
+      type: object
+      additionalProperties:
+        description: Necessary xp to reach this level.
+        type: integer
+        format: int32
+        minimum: 0
+      example:
+        '1': 0
+        '2': 100
+        '3': 250
+        '4': 500
+        '5': 1000
+        '6': 2000
+        '7': 3000
+        '8': 4000
+        '9': 5000
+        '10': 6000
