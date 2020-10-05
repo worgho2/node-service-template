@@ -10,8 +10,6 @@ const config = Config[env]
 const basename = path.basename(__filename)
 const db = {}
 
-console.log(`Server enviroment: ${env}`)
-
 let sequelize
 if (config.url) {
   sequelize = new Sequelize(config.url, config)
