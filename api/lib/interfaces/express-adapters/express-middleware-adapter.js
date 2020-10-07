@@ -1,5 +1,3 @@
-import e from 'express'
-
 class ExpressMiddlewareAdapter {
   static adapt(middleware) {
     return async (req, res, next) => {
@@ -7,11 +5,17 @@ class ExpressMiddlewareAdapter {
         headers: req.headers,
         body: req.body,
         locals: req.locals,
+        props: req.props,
       }
 
       try {
-        const incomingResponse = await middleware(incomingRequest)
-        req.props = incomingResponse ? incomingResponse.props || {} : {}
+        const props = await middleware(incomingRequest)
+
+        req.props = {
+          ...req.props,
+          ...props,
+        }
+
         next()
       } catch (error) {
         next(error)
