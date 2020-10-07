@@ -9,7 +9,7 @@ import compression from 'compression'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import helmet from 'helmet'
-import ErrorHandlerMiddleware from '../../interfaces/middlewares/error-handler-middleware'
+import ErrorHandlerMiddleware from '../lib/interfaces/middlewares/error-handler-middleware'
 
 //Specs
 import swaggerUi from 'swagger-ui-express'
@@ -35,10 +35,8 @@ const swaggerDocs = swaggerJsDoc({
     ],
   },
   apis: [
-    __dirname + '/../../domain/**/*.yaml',
-    // __dirname + '/../../domain/**/*.js',
-    __dirname + '/../../infrastructure/server/handlers/**/*.yaml',
-    __dirname + '/../../infrastructure/server/handlers/**/*.js',
+    __dirname + '/../components/user/*.yaml',
+    __dirname + '/../components/user/*-handler.js',
   ],
 })
 
@@ -55,7 +53,7 @@ app.use(
     validateRequests: true,
     apiSpec: swaggerDocs,
     unknownFormats: ['html'],
-    operationHandlers: __dirname + '/../../infrastructure/server/handlers',
+    operationHandlers: __dirname + '/../components',
   })
 )
 app.use(ErrorHandlerMiddleware.log)

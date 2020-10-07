@@ -1,5 +1,5 @@
-import HttpResponse from '../core/http-response'
-import ServerError from '../core/server-error'
+import HttpResponse from '../../lib/interfaces/core/http-response'
+import ServerError from '../../lib/interfaces/core/server-error'
 
 class UserController {
   constructor(useCases) {

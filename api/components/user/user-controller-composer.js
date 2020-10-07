@@ -1,12 +1,12 @@
-import UserRepository from '../../../infrastructure/repositories/user-repository'
-import UserController from '../user-controller'
+import UserRepository from './user-repository'
+import UserController from './user-controller'
 import {
   DeleteUserUseCase,
   GetAllUsersUseCase,
   GetUserUseCase,
   CreateUserUseCase,
   UpdateUserUseCase,
-} from '../../../application/use-cases/users'
+} from './use-cases'
 
 class UserControllerComposer {
   static compose() {

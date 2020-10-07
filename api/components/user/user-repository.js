@@ -1,4 +1,4 @@
-import db from '../orm/models'
+import db from '../../lib/infrastructure/orm/models'
 
 class UserRepository {
   async getAllUsers() {
@@ -13,8 +13,8 @@ class UserRepository {
     })
   }
 
-  async createUser(domainUser) {
-    return await db.User.create(domainUser)
+  async createUser(user) {
+    return await db.User.create(user)
   }
 
   async updateUser(id, updatedFields) {
