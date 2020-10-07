@@ -1,6 +1,7 @@
-import ExpressRouterAdapter from '../../../interfaces/express-adapters/express-router-adapter'
-import ExpressMiddlewareAdapter from '../../../interfaces/express-adapters/express-middleware-adapter'
-import UserControllerComposer from '../../../interfaces/controllers/composers/user-controller-composer'
+import UserControllerComposer from './user-controller-composer'
+
+import ExpressRouterAdapter from '../../lib/interfaces/express-adapters/express-router-adapter'
+import ExpressMiddlewareAdapter from '../../lib/interfaces/express-adapters/express-middleware-adapter'
 
 const userController = UserControllerComposer.compose()
 
@@ -15,7 +16,7 @@ const userController = UserControllerComposer.compose()
  *          - "user"
  *
  *      operationId: getAllUsers
- *      x-eov-operation-handler: user-handler
+ *      x-eov-operation-handler: user/user-handler
  *
  *      responses:
  *          '200':
@@ -26,6 +27,24 @@ const userController = UserControllerComposer.compose()
  *                    $ref: "#/components/schemas/UserLevels"
  */
 export const getAllUsers = [
+  ExpressMiddlewareAdapter.adapt((req) => {
+    return {
+      id: 1,
+    }
+  }),
+  ExpressMiddlewareAdapter.adapt((req) => {
+    return {
+      id: 12,
+    }
+  }),
+  ExpressMiddlewareAdapter.adapt((req) => {
+    return {
+      car: 3,
+    }
+  }),
+  ExpressMiddlewareAdapter.adapt((req) => {
+    console.log(req.props)
+  }),
   ExpressRouterAdapter.adapt((req) => userController.getAllUsers(req)),
 ]
 
@@ -48,7 +67,7 @@ export const getAllUsers = [
  *            description: User id
  *
  *      operationId: getUser
- *      x-eov-operation-handler: user-handler
+ *      x-eov-operation-handler: user/user-handler
  *
  *      responses:
  *          '200':
@@ -86,7 +105,7 @@ export const getUser = [
  *                              type: string
  *
  *      operationId: createUser
- *      x-eov-operation-handler: user-handler
+ *      x-eov-operation-handler: user/user-handler
  *
  *      responses:
  *          '200':
@@ -132,7 +151,7 @@ export const createUser = [
  *                              type: string
  *
  *      operationId: updateUser
- *      x-eov-operation-handler: user-handler
+ *      x-eov-operation-handler: user/user-handler
  *
  *      responses:
  *          '200':
@@ -165,7 +184,7 @@ export const updateUser = [
  *            description: User id
  *
  *      operationId: deleteUser
- *      x-eov-operation-handler: user-handler
+ *      x-eov-operation-handler: user/user-handler
  *
  *      responses:
  *          '200':
