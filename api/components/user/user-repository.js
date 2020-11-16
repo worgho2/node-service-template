@@ -20,19 +20,15 @@ class UserRepository {
   async updateUser(id, updatedFields) {
     const user = await this.getUserById(id)
 
-    if (user) {
-      return await user.update(updatedFields)
-    }
+    if (!user) return null
 
-    return null
+    return await user.update(updatedFields)
   }
 
   async deleteUser(id) {
     const user = await this.getUserById(id)
 
-    if (!user) {
-      return null
-    }
+    if (!user) return null
 
     return await user.destroy()
   }

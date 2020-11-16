@@ -6,193 +6,213 @@ import ExpressMiddlewareAdapter from '../../lib/interfaces/express-adapters/expr
 const userController = UserControllerComposer.compose()
 
 /**
- * @swagger
+ * @openapi
  * /users:
  *   get:
  *      summary: "Ger all users"
  *      description: |
- *          Return all users
+ *        Return all users
  *      tags:
- *          - "user"
+ *        - "user"
+ *
+ *      responses:
+ *        '200':
+ *          description: "Ok"
+ *          content:
+ *            application-json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  users:
+ *                    type: array
+ *                    items:
+ *                      $ref: "#/components/schemas/User"
+ *        400:
+ *          description: "Error"
+ *          content:
+ *            application-json:
+ *              schema:
+ *                $ref: "#/components/schemas/Error"
  *
  *      operationId: getAllUsers
  *      x-eov-operation-handler: user/user-handler
- *
- *      responses:
- *          '200':
- *              description: "Successful operation"
- *              content:
- *                application-json:
- *                  schema:
- *                    $ref: "#/components/schemas/UserLevels"
  */
 export const getAllUsers = [
-  ExpressMiddlewareAdapter.adapt((req) => {
-    return {
-      id: 1,
-    }
-  }),
-  ExpressMiddlewareAdapter.adapt((req) => {
-    return {
-      id: 12,
-    }
-  }),
-  ExpressMiddlewareAdapter.adapt((req) => {
-    return {
-      car: 3,
-    }
-  }),
-  ExpressMiddlewareAdapter.adapt((req) => {
-    console.log(req.props)
-  }),
   ExpressRouterAdapter.adapt((req) => userController.getAllUsers(req)),
 ]
 
 /**
- * @swagger
+ * @openapi
  * /users/{id}:
  *   get:
  *      summary: "Get User"
  *      description: |
- *          Return user data
+ *        Return user data
  *      tags:
- *          - "user"
+ *        - "user"
  *
  *      parameters:
- *          - in: path
- *            name: id
- *            schema:
- *              type: integer
- *            required: true
- *            description: User id
+ *        - in: path
+ *          name: id
+ *          required: true
+ *          schema:
+ *            type: integer
+ *
+ *      responses:
+ *        200:
+ *          description: "Ok"
+ *          content:
+ *            application-json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  user:
+ *                    $ref: "#/components/schemas/User"
+ *        400:
+ *          description: "Error"
+ *          content:
+ *            application-json:
+ *              schema:
+ *                $ref: "#/components/schemas/Error"
  *
  *      operationId: getUser
  *      x-eov-operation-handler: user/user-handler
- *
- *      responses:
- *          '200':
- *              description: "Successful operation"
- *              content:
- *                application-json:
- *                  schema:
- *                    $ref: "#/components/schemas/UserLevels"
  */
 export const getUser = [
   ExpressRouterAdapter.adapt((req) => userController.getUser(req)),
 ]
 
 /**
- * @swagger
+ * @openapi
  * /users:
  *   post:
  *      summary: "Create User"
  *      description: |
- *          Return user data
+ *        Return user data
  *      tags:
- *          - "user"
+ *        - "user"
  *
  *      requestBody:
- *          description: User info
- *          required: true
+ *        description: User info
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                name:
+ *                  type: string
+ *                email:
+ *                  type: string
+ *
+ *      responses:
+ *        '201':
+ *          description: "Created"
  *          content:
- *              application/json:
- *                  schema:
- *                      type: object
- *                      properties:
- *                          name:
- *                              type: string
- *                          email:
- *                              type: string
+ *            application-json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  user:
+ *                    $ref: "#/components/schemas/User"
+ *        400:
+ *          description: "Error"
+ *          content:
+ *            application-json:
+ *              schema:
+ *                $ref: "#/components/schemas/Error"
  *
  *      operationId: createUser
  *      x-eov-operation-handler: user/user-handler
- *
- *      responses:
- *          '200':
- *              description: "Successful operation"
- *              content:
- *                application-json:
- *                  schema:
- *                    $ref: "#/components/schemas/UserLevels"
  */
 export const createUser = [
   ExpressRouterAdapter.adapt((req) => userController.createUser(req)),
 ]
 
 /**
- * @swagger
+ * @openapi
  * /users/{id}:
  *   put:
  *      summary: "Update User"
  *      description: |
- *          Return user data
+ *        Return user data
  *      tags:
- *          - "user"
+ *        - "user"
  *
  *      parameters:
- *          - in: path
- *            name: id
- *            schema:
- *              type: integer
- *            required: true
- *            description: User id
+ *        - in: path
+ *          required: true
+ *          name: id
+ *          schema:
+ *            type: integer
  *
  *      requestBody:
- *          description: User info
- *          required: false
+ *        description: User info
+ *        required: false
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                name:
+ *                  type: string
+ *                email:
+ *                  type: string
+ *
+ *      responses:
+ *        '200':
+ *          description: "Ok"
  *          content:
- *              application/json:
- *                  schema:
- *                      type: object
- *                      properties:
- *                          name:
- *                              type: string
- *                          email:
- *                              type: string
+ *            application-json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  user:
+ *                    $ref: "#/components/schemas/User"
+ *        400:
+ *          description: "Error"
+ *          content:
+ *            application-json:
+ *              schema:
+ *                $ref: "#/components/schemas/Error"
  *
  *      operationId: updateUser
  *      x-eov-operation-handler: user/user-handler
- *
- *      responses:
- *          '200':
- *              description: "Successful operation"
- *              content:
- *                application-json:
- *                  schema:
- *                    $ref: "#/components/schemas/UserLevels"
  */
 export const updateUser = [
   ExpressRouterAdapter.adapt((req) => userController.updateUser(req)),
 ]
 
 /**
- * @swagger
+ * @openapi
  * /users/{id}:
  *   delete:
  *      summary: "Delete User"
  *      description: |
- *          Delete user
+ *        Delete user
  *      tags:
- *          - "user"
+ *        - "user"
  *
  *      parameters:
- *          - in: path
- *            name: id
- *            schema:
- *              type: integer
- *            required: true
- *            description: User id
+ *        - in: path
+ *          required: true
+ *          name: id
+ *          schema:
+ *            type: integer
+
+ *
+ *      responses:
+ *        204:
+ *          description: "No Content"
+ *        400:
+ *          description: "Error"
+ *          content:
+ *            application-json:
+ *              schema:
+ *                $ref: "#/components/schemas/Error"
  *
  *      operationId: deleteUser
  *      x-eov-operation-handler: user/user-handler
- *
- *      responses:
- *          '200':
- *              description: "Successful operation"
- *              content:
- *                application-json:
- *                  schema:
- *                    $ref: "#/components/schemas/UserLevels"
  */
 export const deleteUser = [
   ExpressRouterAdapter.adapt((req) => userController.deleteUser(req)),

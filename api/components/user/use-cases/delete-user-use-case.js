@@ -1,10 +1,16 @@
+import ClientError from '../../../lib/interfaces/core/client-error'
+
 class DeleteUserUseCase {
   constructor({ userRepository }) {
     this.userRepository = userRepository
   }
 
   async execute(id) {
-    return await this.userRepository.deleteUser(id)
+    const deletedUserId = await this.userRepository.deleteUser(id)
+
+    if (!deletedUserId) throw ClientError.notFound('User Not Found')
+
+    return deletedUserId
   }
 }
 

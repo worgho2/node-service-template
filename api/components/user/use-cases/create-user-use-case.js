@@ -1,3 +1,5 @@
+import ServerError from '../../../lib/interfaces/core/server-error'
+
 class CreateUserUseCase {
   constructor({ userRepository }) {
     this.userRepository = userRepository
