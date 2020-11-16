@@ -19,10 +19,6 @@ class UserController {
     const { getUserUseCase } = this.useCases
     const user = await getUserUseCase.execute(id)
 
-    if (!user) {
-      throw new ServerError.NotFound(id)
-    }
-
     return HttpResponse.ok({ user })
   }
 
@@ -30,8 +26,12 @@ class UserController {
     const { name, email } = req.body
 
     const { createUserUseCase } = this.useCases
-    const user = await createUserUseCase.execute({ name, email })
+    const user = await createUserUseCase.execute({
+      name,
+      email,
+    })
 
+    if (!user) return HttpResponse.noContent()
     return HttpResponse.created({ user })
   }
 
@@ -42,10 +42,6 @@ class UserController {
     const { updateUserUseCase } = this.useCases
     const user = await updateUserUseCase.execute(id, { name, email })
 
-    if (!user) {
-      throw new ServerError.Validation('Cannot update user')
-    }
-
     return HttpResponse.ok({ user })
   }
 
@@ -53,13 +49,9 @@ class UserController {
     const { id } = req.params
 
     const { deleteUserUseCase } = this.useCases
-    const success = await deleteUserUseCase.execute(id)
+    const deletedUserId = await deleteUserUseCase.execute(id)
 
-    if (!success) {
-      throw new ServerError.Validation('Cannot delete user')
-    }
-
-    return HttpResponse.ok({ id })
+    return HttpResponse.noContent()
   }
 }
 
