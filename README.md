@@ -1,1 +1,1 @@
-# node-service-template
+# Node Service Template
