@@ -1,56 +1,42 @@
 {
-  "name": "service-template",
+  "name": "node-service-template",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node Service Template",
   "main": "index.js",
+  "engines": {
+    "node": "16.10"
+  },
   "scripts": {
-    "build-server": "rm -rf build && babel -d ./build/Release ./api -s",
-    "copy-domain": "babel ./api/lib/domain/*.yaml --out-dir ./build/Release/lib/domain --copy-files",
-    "build": "npm run build-server && npm run copy-domain",
-    "start": "node ./build/Release/index.js",
-    "database-setup-dev": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
-    "dev": "NODE_ENV=development nodemon --exec babel-node ./api/index.js"
+    "start": "ts-node src/server.ts"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/worgho2/node-service-template.git"
   },
-  "author": "",
+  "author": "Otávio Baziewicz Filho",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/worgho2/node-service-template/issues"
   },
   "homepage": "https://github.com/worgho2/node-service-template#readme",
-  "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/node": "^7.10.5",
-    "@babel/plugin-transform-runtime": "^7.11.5",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/register": "^7.11.5",
-    "@babel/runtime": "^7.11.2",
-    "jest": "^26.4.2",
-    "prettier": "^2.1.2",
-    "superagent": "^6.1.0",
-    "supertest": "^5.0.0"
-  },
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "chalk": "^4.1.0",
-    "compression": "^1.7.4",
+    "config": "^3.3.6",
     "cors": "^2.8.5",
-    "debug": "^4.2.0",
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-openapi-validator": "^4.0.7",
-    "helmet": "^4.1.1",
+    "express-http-context": "^1.2.4",
+    "helmet": "^4.6.0",
+    "inversify": "^6.0.1",
+    "inversify-express-utils": "^6.4.3",
     "morgan": "^1.10.0",
-    "path": "^0.12.7",
-    "pg": "^8.3.3",
-    "pg-hstore": "^2.3.3",
-    "sequelize": "^6.3.5",
-    "sequelize-cli": "^6.2.0",
-    "swagger-jsdoc": "^4.2.0",
-    "swagger-ui-express": "^4.1.4"
+    "reflect-metadata": "^0.1.13",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/morgan": "^1.9.3",
+    "@types/node": "^16.11.1",
+    "prettier": "^2.4.1",
+    "typescript": "^4.4.4"
   }
 }
