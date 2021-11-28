@@ -9,10 +9,11 @@
     },
     "scripts": {
         "clean": "rm -rf lib",
-        "build": "npm test && npm run clean && tsc",
-        "lint:fix": "tslint --project tsconfig.json --fix",
-        "prettier:fix": "prettier --config .prettierrc --write .",
-        "pretest": "npm run prettier:fix && npm run lint:fix",
+        "prebuild": "npm test && npm run clean",
+        "build": "tsc",
+        "lint": "tslint --project tsconfig.json --fix",
+        "prettier": "prettier --config .prettierrc --write .",
+        "pretest": "npm run prettier && npm run lint",
         "test": " mocha -r ts-node/register '**/__tests__/**/*.spec.ts'",
         "dev": "nodemon --watch 'src/' --exec 'ts-node src/server.ts' -e ts"
     },
