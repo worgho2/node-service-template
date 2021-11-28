@@ -8,12 +8,11 @@
         "node": "16.10"
     },
     "scripts": {
-        "clean": "rm -rf lib",
-        "prebuild": "npm test && npm run clean",
-        "build": "tsc",
         "prettier": "prettier --config .prettierrc --write .",
-        "pretest": "npm run prettier",
         "test": "mocha",
+        "clean": "rm -rf lib",
+        "prebuild": "npm run prettier && npm test && npm run clean",
+        "build": "tsc",
         "dev": "nodemon --watch 'src/' --exec 'ts-node src/server.ts' -e ts"
     },
     "repository": {

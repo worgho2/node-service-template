@@ -17,9 +17,9 @@ export class UserService implements IUserService {
         this.logger.info('UserService.getUser called')
 
         try {
-            return {
+            return <User>{
                 uid,
-            } as User
+            }
         } catch (error) {
             throw error
         }
