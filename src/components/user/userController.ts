@@ -1,36 +1,44 @@
 import { Request, Response } from 'express'
 import { inject } from 'inversify'
-import { request, response, controller, httpGet, BaseHttpController, httpPost } from 'inversify-express-utils'
+import { request, response, controller, httpGet, requestParam } from 'inversify-express-utils'
 import { TYPES } from '../../types'
 import { Logger } from '../../utils/logger'
+import { BaseController } from '../core/baseController'
+import { IEnvironmentService } from '../core/environment/environmentService'
+import { UserNotFoundError } from './userExceptions'
+import { IUserService } from './userService'
 
-@controller('/user')
-export class UserController extends BaseHttpController {
-    constructor(@inject(TYPES.Logger) private readonly logger: Logger) {
-        super()
+@controller('/users')
+export class UserController extends BaseController {
+    constructor(
+        @inject(TYPES.Logger) protected readonly logger: Logger,
+        @inject(TYPES.EnvironmentService) protected readonly environmentService: IEnvironmentService,
+        @inject(TYPES.UserService) protected readonly userService: IUserService
+    ) {
+        super(logger)
     }
 
-    @httpGet('/', TYPES.FirebaseAuthMiddleware)
-    async getUser(@request() req: Request, @response() res: Response) {
+    @httpGet('/:uid', TYPES.FirebaseAuthMiddleware)
+    async getUser(@request() req: Request, @response() res: Response, @requestParam('uid') uid: string) {
+        this.logger.info('UserController.getUser called')
+
         try {
-            this.logger.info('started request')
-            this.logger.warn('ish na request')
-            res.status(200).json({ user: 'marcos' })
+            const user = await this.userService.getUser(uid)
+            res.status(200).json(user)
         } catch (error) {
-            throw error //tentar handlar o erro se não der, passar pra frente
+            this.tryHandleControllerError(req, res, error)
         }
     }
 
-    @httpGet('/a', TYPES.FirebaseAuthMiddleware)
-    async getUsera(@request() req: Request, @response() res: Response) {
+    @httpGet('/:uid/fail', TYPES.FirebaseAuthMiddleware)
+    async getUserFail(@request() req: Request, @response() res: Response, @requestParam('uid') uid: string) {
+        this.logger.info('UserController.getUserFail called')
+
         try {
-            const a = new Error()
-            // a.name = 'err brabo de ruer'
-            // a.message = 'samambaia'
-            a.stack = JSON.stringify({ test: 1, testtt: 2 })
-            throw a
+            const user = await this.userService.getUserFail(uid)
+            res.status(200).json(user)
         } catch (error) {
-            throw error //tentar handlar o erro se não der, passar pra frente
+            this.tryHandleControllerError(req, res, error)
         }
     }
 }

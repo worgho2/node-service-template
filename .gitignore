@@ -101,3 +101,6 @@ dist
 
 # MacOS
 .DS_Store
+
+# Config files
+config/*

@@ -7,11 +7,11 @@ import * as morgan from 'morgan'
 import { InversifyExpressServer } from 'inversify-express-utils'
 import container from './container'
 import { TYPES } from './types'
-import { ErrorMiddleware } from './middlewares/errorMiddleware'
-import { Logger } from './utils/logger'
+import { ILogger } from './utils/logger'
+import { IExceptionHandler } from './utils/exceptionHandler'
 
-const logger = container.get<Logger>(TYPES.Logger)
-const errorMiddleware = container.get<ErrorMiddleware>(TYPES.ErrorMiddleware)
+const logger = container.get<ILogger>(TYPES.Logger)
+const exceptionHandler = container.get<IExceptionHandler>(TYPES.ExceptionHandler)
 
 export const app = new InversifyExpressServer(container, null, { rootPath: '/api' })
     .setConfig((app) =>
@@ -43,5 +43,5 @@ export const app = new InversifyExpressServer(container, null, { rootPath: '/api
             }),
         ])
     )
-    .setErrorConfig((app) => app.use(errorMiddleware.handler))
+    .setErrorConfig((app) => app.use(exceptionHandler.handler))
     .build()

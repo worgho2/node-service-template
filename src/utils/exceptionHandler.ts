@@ -3,20 +3,18 @@ import { injectable } from 'inversify'
 import { request, response, next } from 'inversify-express-utils'
 import container from '../container'
 import { TYPES } from '../types'
-import { Logger } from '../utils/logger'
+import { ILogger } from '../utils/logger'
+
+export interface IExceptionHandler {
+    handler(err: Error, req: Request, res: Response, next: NextFunction): any
+}
 
 @injectable()
-export class ErrorMiddleware {
+export class ExceptionHandler implements IExceptionHandler {
     async handler(err: Error, @request() req: Request, @response() res: Response, @next() next: NextFunction) {
-        const logger = container.get<Logger>(TYPES.Logger)
-
-        logger.error(`${err.name || '-'} : ${err.message || '-'} : ${err.stack}`)
-
-        res.status(500).send({
-            error: err.name,
-            message: err.message,
-        })
-
+        const logger = container.get<ILogger>(TYPES.Logger)
+        logger.error('Internal Server Error', err)
+        res.sendStatus(500)
         next()
     }
 }
