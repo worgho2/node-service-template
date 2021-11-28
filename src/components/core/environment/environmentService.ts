@@ -1,5 +1,5 @@
 import { injectable } from 'inversify'
-import * as config from 'config'
+import config from 'config'
 import { EnvironmentGlobals } from './models/environmentGlobals'
 
 export interface IEnvironmentService {

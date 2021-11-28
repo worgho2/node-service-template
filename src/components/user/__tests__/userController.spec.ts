@@ -1,2 +1,7 @@
 import { expect } from 'chai'
-// import { describe } from 'mocha'
+
+describe('UserController integration tests', () => {
+    it('Example 1', () => {
+        expect(1).to.be.equal(1)
+    })
+})

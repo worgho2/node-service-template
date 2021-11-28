@@ -15,7 +15,7 @@ export class BaseError extends Error {
     }
 
     object(): any {
-        const stack = this.stack.split('\n')
+        const stack = (this.stack || '').split('\n')
         stack.shift()
 
         return {

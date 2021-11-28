@@ -11,21 +11,21 @@ export class ApiKeyAuthMiddleware extends BaseMiddleware {
         super()
     }
 
-    async handler(@request() req: Request, @response() res: Response, @next() next: NextFunction) {
+    async handler(@request() req: Request, @response() res: Response, @next() nextFn: NextFunction) {
         this.logger.info('ApiKeyAuthMiddleware.handler called')
 
         try {
-            next()
+            nextFn()
         } catch (error) {
             if (error instanceof BaseError) {
-                const request = {
+                const requestData = {
                     path: req.path,
                     params: req.params,
                     query: req.query,
                     body: req.body,
                 }
 
-                this.logger.error(error.printable(), request)
+                this.logger.error(error.printable(), requestData)
                 res.status(error.httpStatusCode).json(error.publicObject())
                 return
             }

@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify'
 import { TYPES } from '../../types'
 import { ILogger } from '../../utils/logger'
 import { User } from './models/user'
-import { UserNotFoundError } from './userExceptions'
+import { UserNotFoundError } from './exceptions/userNotFoundError'
 
 export interface IUserService {
     getUser(uid: string): Promise<User>
@@ -14,9 +14,11 @@ export class UserService implements IUserService {
     constructor(@inject(TYPES.Logger) private readonly logger: ILogger) {}
 
     async getUser(uid: string): Promise<User> {
+        this.logger.info('UserService.getUser called')
+
         try {
             return {
-                uid: uid,
+                uid,
             } as User
         } catch (error) {
             throw error
@@ -24,6 +26,8 @@ export class UserService implements IUserService {
     }
 
     async getUserFail(uid: string): Promise<User> {
+        this.logger.info('UserService.getUserFail called')
+
         try {
             throw new UserNotFoundError(uid)
         } catch (error) {

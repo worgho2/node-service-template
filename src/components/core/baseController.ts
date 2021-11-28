@@ -13,14 +13,14 @@ export class BaseController extends BaseHttpController {
 
     tryHandleControllerError(@request() req: Request, @response() res: Response, error: Error): any {
         if (error instanceof BaseError) {
-            const request = {
+            const requestData = {
                 path: req.path,
                 params: req.params,
                 query: req.query,
                 body: req.body,
             }
 
-            this.logger.error(error.printable(), request)
+            this.logger.error(error.printable(), requestData)
             res.status(error.httpStatusCode).json(error.publicObject())
             return
         }

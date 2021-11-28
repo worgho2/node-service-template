@@ -1,4 +1,4 @@
-import { BaseError } from '../../utils/baseError'
+import { BaseError } from '../../../utils/baseError'
 
 export class UserNotFoundError extends BaseError {
     constructor(uid: string) {

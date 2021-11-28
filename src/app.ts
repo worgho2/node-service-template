@@ -1,9 +1,9 @@
 import 'reflect-metadata'
-import * as httpContext from 'express-http-context'
-import * as express from 'express'
-import * as helmet from 'helmet'
-import * as cors from 'cors'
-import * as morgan from 'morgan'
+import httpContext from 'express-http-context'
+import express from 'express'
+import helmet from 'helmet'
+import cors from 'cors'
+import morgan from 'morgan'
 import { InversifyExpressServer } from 'inversify-express-utils'
 import container from './container'
 import { TYPES } from './types'
@@ -14,8 +14,8 @@ const logger = container.get<ILogger>(TYPES.Logger)
 const exceptionHandler = container.get<IExceptionHandler>(TYPES.ExceptionHandler)
 
 export const app = new InversifyExpressServer(container, null, { rootPath: '/api' })
-    .setConfig((app) =>
-        app.use([
+    .setConfig((appConfig) =>
+        appConfig.use([
             httpContext.middleware,
             morgan(':method :url :status :res[content-length] - :response-time ms', {
                 stream: {
@@ -43,5 +43,5 @@ export const app = new InversifyExpressServer(container, null, { rootPath: '/api
             }),
         ])
     )
-    .setErrorConfig((app) => app.use(exceptionHandler.handler))
+    .setErrorConfig((appErrorConfig) => appErrorConfig.use(exceptionHandler.handler))
     .build()

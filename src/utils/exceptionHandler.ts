@@ -12,22 +12,22 @@ export interface IExceptionHandler {
 
 @injectable()
 export class ExceptionHandler implements IExceptionHandler {
-    async handler(err: Error, @request() req: Request, @response() res: Response, @next() next: NextFunction) {
+    async handler(err: Error, @request() req: Request, @response() res: Response, @next() nextFn: NextFunction) {
         const logger = container.get<ILogger>(TYPES.Logger)
 
         const error = new BaseError(err.name, err.message, 500)
         error.stack = err.stack
 
-        const request = {
+        const requestData = {
             path: req.path,
             params: req.params,
             query: req.query,
             body: req.body,
         }
 
-        logger.error(error.printable(), request)
+        logger.error(error.printable(), requestData)
 
         res.sendStatus(500)
-        next()
+        nextFn()
     }
 }
