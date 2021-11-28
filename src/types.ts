@@ -1,20 +1,20 @@
 export const TYPES = {
     /**
-     * Middlewares
-     */
-    FirebaseAuthMiddleware: Symbol('FirebaseAuthMiddleware'),
-    ApiKeyAuthMiddleware: Symbol('ApiKeyAuthMiddleware'),
-    WebhookAuthMiddleware: Symbol('WebhookAuthMiddleware'),
-    ErrorMiddleware: Symbol('ErrorMiddleware'),
-    LoggerMiddleware: Symbol('LoggerMiddleware'),
-
-    /**
      * Utils
      */
     Logger: Symbol('Logger'),
+    ExceptionHandler: Symbol('ExceptionHandler'),
+
+    /**
+     * Core
+     */
+    FirebaseAuthMiddleware: Symbol('FirebaseAuthMiddleware'),
+    ApiKeyAuthMiddleware: Symbol('ApiKeyAuthMiddleware'),
+    EnvironmentService: Symbol('EnvironmentService'),
 
     /**
      * User
      */
     UserController: Symbol('UserController'),
+    UserService: Symbol('UserService'),
 }

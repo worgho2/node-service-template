@@ -1,8 +1,15 @@
 import { injectable } from 'inversify'
 import * as winston from 'winston'
 
+export interface ILogger {
+    error(message: string, ...metadata: Array<any>): winston.Logger
+    info(message: string, ...metadata: Array<any>): winston.Logger
+    warn(message: string, ...metadata: Array<any>): winston.Logger
+    http(message: string, ...metadata: Array<any>): winston.Logger
+}
+
 @injectable()
-export class Logger {
+export class Logger implements ILogger {
     constructor() {
         const colors = {
             error: 'red',
@@ -66,8 +73,8 @@ export class Logger {
 
     private logger: winston.Logger
 
-    info = (message: string) => this.logger.info(message)
-    warn = (message: string) => this.logger.warn(message)
-    error = (message: string) => this.logger.error(message)
-    http = (message: string) => this.logger.http(message)
+    error = (message: string, ...metadata: Array<any>) => this.logger.error(message, ...metadata)
+    info = (message: string, ...metadata: Array<any>) => this.logger.info(message, ...metadata)
+    warn = (message: string, ...metadata: Array<any>) => this.logger.warn(message, ...metadata)
+    http = (message: string, ...metadata: Array<any>) => this.logger.http(message, ...metadata)
 }
