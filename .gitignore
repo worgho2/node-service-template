@@ -104,3 +104,6 @@ dist
 
 # Config files
 config/*
+
+# Typescript build
+lib
