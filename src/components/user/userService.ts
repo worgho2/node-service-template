@@ -15,9 +15,9 @@ export class UserService implements IUserService {
 
     async getUser(uid: string): Promise<User> {
         try {
-            return <User>{
+            return {
                 uid: uid,
-            }
+            } as User
         } catch (error) {
             throw error
         }

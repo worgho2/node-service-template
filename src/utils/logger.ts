@@ -2,10 +2,10 @@ import { injectable } from 'inversify'
 import * as winston from 'winston'
 
 export interface ILogger {
-    error(message: string, ...metadata: Array<any>): winston.Logger
-    info(message: string, ...metadata: Array<any>): winston.Logger
-    warn(message: string, ...metadata: Array<any>): winston.Logger
-    http(message: string, ...metadata: Array<any>): winston.Logger
+    error(message: string, ...metadata: any[]): winston.Logger
+    info(message: string, ...metadata: any[]): winston.Logger
+    warn(message: string, ...metadata: any[]): winston.Logger
+    http(message: string, ...metadata: any[]): winston.Logger
 }
 
 @injectable()
@@ -27,8 +27,8 @@ export class Logger implements ILogger {
                 http: 3,
                 debug: 4,
             },
-            transports: ((): Array<winston.transport> => {
-                const transports: Array<winston.transport> = []
+            transports: ((): winston.transport[] => {
+                const transports: winston.transport[] = []
 
                 /**
                  * Console transporter
@@ -73,8 +73,8 @@ export class Logger implements ILogger {
 
     private logger: winston.Logger
 
-    error = (message: string, ...metadata: Array<any>) => this.logger.error(message, ...metadata)
-    info = (message: string, ...metadata: Array<any>) => this.logger.info(message, ...metadata)
-    warn = (message: string, ...metadata: Array<any>) => this.logger.warn(message, ...metadata)
-    http = (message: string, ...metadata: Array<any>) => this.logger.http(message, ...metadata)
+    error = (message: string, ...metadata: any[]) => this.logger.error(message, ...metadata)
+    info = (message: string, ...metadata: any[]) => this.logger.info(message, ...metadata)
+    warn = (message: string, ...metadata: any[]) => this.logger.warn(message, ...metadata)
+    http = (message: string, ...metadata: any[]) => this.logger.http(message, ...metadata)
 }

@@ -5,7 +5,6 @@ import { TYPES } from '../../types'
 import { Logger } from '../../utils/logger'
 import { BaseController } from '../core/baseController'
 import { IEnvironmentService } from '../core/environment/environmentService'
-import { UserNotFoundError } from './userExceptions'
 import { IUserService } from './userService'
 
 @controller('/users')
