@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { BaseMiddleware, request, response, next } from 'inversify-express-utils'
 import { inject, injectable } from 'inversify'
-import { TYPES } from '../../../../types'
+import { TYPES } from '../../../../ioc/types'
 import { Logger } from '../../../../utils/logger'
 import { BaseError } from '../../../../utils/baseError'
 

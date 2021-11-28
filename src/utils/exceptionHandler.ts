@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
 import { injectable } from 'inversify'
 import { request, response, next } from 'inversify-express-utils'
-import container from '../container'
-import { TYPES } from '../types'
+import container from '../ioc/container'
+import { TYPES } from '../ioc/types'
 import { ILogger } from '../utils/logger'
 import { BaseError } from './baseError'
 

@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify'
-import { TYPES } from '../../types'
+import { TYPES } from '../../ioc/types'
 import { ILogger } from '../../utils/logger'
 import { User } from './models/user'
 import { UserNotFoundError } from './exceptions/userNotFoundError'
