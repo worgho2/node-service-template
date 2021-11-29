@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify'
-import { TYPES } from '../../types'
+import { TYPES } from '../../ioc/types'
 import { ILogger } from '../../utils/logger'
 import { User } from './models/user'
 import { UserNotFoundError } from './exceptions/userNotFoundError'
@@ -17,9 +17,9 @@ export class UserService implements IUserService {
         this.logger.info('UserService.getUser called')
 
         try {
-            return {
+            return <User>{
                 uid,
-            } as User
+            }
         } catch (error) {
             throw error
         }

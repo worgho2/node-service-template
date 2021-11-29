@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { inject, injectable } from 'inversify'
 import { BaseHttpController, request, response } from 'inversify-express-utils'
-import { TYPES } from '../../types'
+import { TYPES } from '../../ioc/types'
 import { BaseError } from '../../utils/baseError'
 import { ILogger } from '../../utils/logger'
 
@@ -11,7 +11,7 @@ export class BaseController extends BaseHttpController {
         super()
     }
 
-    tryHandleControllerError(@request() req: Request, @response() res: Response, error: Error): any {
+    tryHandleControllerError(@request() req: Request, @response() res: Response, error: Error): void {
         if (error instanceof BaseError) {
             const requestData = {
                 path: req.path,

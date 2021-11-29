@@ -1,6 +1,6 @@
 import { app } from './app'
-import container from './container'
-import { TYPES } from './types'
+import container from './ioc/container'
+import { TYPES } from './ioc/types'
 import { ILogger } from './utils/logger'
 
 const logger = container.get<ILogger>(TYPES.Logger)

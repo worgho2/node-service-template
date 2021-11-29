@@ -5,10 +5,10 @@ import helmet from 'helmet'
 import cors from 'cors'
 import morgan from 'morgan'
 import { InversifyExpressServer } from 'inversify-express-utils'
-import container from './container'
-import { TYPES } from './types'
-import { ILogger } from './utils/logger'
-import { IExceptionHandler } from './utils/exceptionHandler'
+import container from './ioc/container'
+import { TYPES } from './ioc/types'
+import { ILogger } from '@utils/logger'
+import { IExceptionHandler } from '@utils/exceptionHandler'
 
 const logger = container.get<ILogger>(TYPES.Logger)
 const exceptionHandler = container.get<IExceptionHandler>(TYPES.ExceptionHandler)

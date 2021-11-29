@@ -28,7 +28,14 @@
         "suppressImplicitAnyIndexErrors": false,
         "target": "es5",
         "types": ["mocha", "reflect-metadata", "node"],
-        "outDir": "lib"
+        "outDir": "lib",
+        "baseUrl": "./",
+        "paths": {
+            "@ioc/*": ["./src/ioc/*"],
+            "@utils/*": ["./src/utils/*"],
+            "@core/*": ["./src/components/core/*"],
+            "@user/*": ["./src/components/user/*"]
+        }
     },
     "exclude": ["node_modules"]
 }

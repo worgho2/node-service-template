@@ -1,13 +1,13 @@
 import { Container } from 'inversify'
-import { FirebaseAuthMiddleware } from './components/core/auth/firebase/firebaseAuthMiddleware'
-import { ApiKeyAuthMiddleware } from './components/core/auth/apiKey/apiKeyAuthMiddleware'
-import { ExceptionHandler, IExceptionHandler } from './utils/exceptionHandler'
-import { Logger } from './utils/logger'
-import { UserController } from './components/user/userController'
+import { FirebaseAuthMiddleware } from '../components/core/auth/firebase/firebaseAuthMiddleware'
+import { ApiKeyAuthMiddleware } from '../components/core/auth/apiKey/apiKeyAuthMiddleware'
+import { ExceptionHandler, IExceptionHandler } from '../utils/exceptionHandler'
+import { Logger } from '../utils/logger'
+import { UserController } from '../components/user/userController'
 import { TYPES } from './types'
-import { EnvironmentService, IEnvironmentService } from './components/core/environment/environmentService'
+import { EnvironmentService, IEnvironmentService } from '../components/core/environment/environmentService'
 import { BaseMiddleware } from 'inversify-express-utils'
-import { IUserService, UserService } from './components/user/userService'
+import { IUserService, UserService } from '../components/user/userService'
 
 const container = new Container()
 
