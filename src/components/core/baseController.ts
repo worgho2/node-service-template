@@ -11,7 +11,7 @@ export class BaseController extends BaseHttpController {
         super()
     }
 
-    tryHandleControllerError(@request() req: Request, @response() res: Response, error: Error): void {
+    tryHandleControllerError(@request() req: Request, @response() res: Response, error: any): void {
         if (error instanceof BaseError) {
             const requestData = {
                 path: req.path,
