@@ -6,7 +6,10 @@
         "termsOfService": "http://example.com/terms/",
         "contact": { "name": "API Support", "url": "http://www.exmaple.com/support", "email": "support@example.com" }
     },
-    "servers": [{ "url": "http://localhost:3000", "description": "Local API with some extra changes" }],
+    "servers": [
+        { "url": "http://localhost:3000", "description": "Local API" },
+        { "url": "http://google.com", "description": "Production" }
+    ],
     "paths": {},
     "components": {
         "schemas": {
