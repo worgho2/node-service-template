@@ -7,8 +7,8 @@ import morgan from 'morgan'
 import { InversifyExpressServer } from 'inversify-express-utils'
 import container from './ioc/container'
 import { TYPES } from './ioc/types'
-import { ILogger } from '@utils/logger'
-import { IExceptionHandler } from '@utils/exceptionHandler'
+import { ILogger } from '../src/utils/logger'
+import { IExceptionHandler } from '../src/utils/exceptionHandler'
 
 const logger = container.get<ILogger>(TYPES.Logger)
 const exceptionHandler = container.get<IExceptionHandler>(TYPES.ExceptionHandler)
