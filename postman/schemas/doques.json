@@ -1,0 +1,27 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "YUR API",
+        "version": "1.0.0",
+        "termsOfService": "http://example.com/terms/",
+        "contact": { "name": "API Support", "url": "http://www.exmaple.com/support", "email": "support@example.com" }
+    },
+    "servers": [{ "url": "http://localhost:3000", "description": "Local API with some extra changes" }],
+    "paths": {},
+    "components": {
+        "schemas": {
+            "Post": {
+                "type": "object",
+                "required": ["userId", "title", "body"],
+                "properties": {
+                    "id": { "type": "integer", "description": "The Auto-generated id of a post" },
+                    "userId": { "type": "integer", "description": "id of author" },
+                    "title": { "type": "string", "description": "title of post" },
+                    "body": { "type": "string", "description": "content of post *" }
+                },
+                "example": { "id": 1, "userId": 1, "title": "my title", "body": "my article" }
+            }
+        }
+    },
+    "tags": []
+}
